@@ -1,18 +1,12 @@
 import dotenv from "dotenv";
-import User from "../models/user-model.js";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
 
 const verifyToken = async (req, res, next) => {
   try {
-    const token = req?.cookies?.accessToken;
+    const token = req?.cookies?.accessToken || req?.headers?.authorization
     // console.log("jwt token: ", token);
-
-    // req.header("Authorization");
-    // ||
-    // req.header("Authorization")
-    // .replace("Bearer ", "");
 
     if (!token) {
       return res.status(401).json({ message: "Access token is missing or invalid" });

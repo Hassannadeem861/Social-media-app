@@ -6,14 +6,35 @@ import fs from "fs"; // To remove local temp file
 const createMessage = async (req, res) => {
   try {
 
+    const { to_id, messageText } = req.body
+
+    if (!to_id || !messageText) {
+      return res
+        .status(201)
+        .send(`Required parameter missing,
+           example body: 
+           {
+            to_id: "dsdsdsdsdsdsdsdsdsdddsd",
+            textMessage: "some text"
+          }`
+        );
+    }
+
     const insertMessage = await Chat.create({
 
+      //  mari ida
+      fromName: req.user.username,
+      fromEmail: req.user.fromEmail,
+      from_id: req.user.from_id,
+
+      //  dosra user ki id
+      to_id: req.user.to_id,
     })
     console.log("insertMessage :", insertMessage);
 
     return res
       .status(201)
-      .json({ message: "Registration successfully", insertMessage });
+      .json({ message: "Message send successfully", insertMessage });
 
 
   } catch (error) {
