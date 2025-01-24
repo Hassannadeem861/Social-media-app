@@ -26,11 +26,13 @@ app.use(express.static("public"));
 // app.use(morgan("dev"));
 
 import userRoute from "./routes/user-route.js";
+import chatRoute from "./routes/chat-route.js";
 // import postRoute from "./routes/post-route.js";
 // import commentRoute from "./routes/comment-route.js";
 
 
 app.use("/api/v1", userRoute);
+app.use("/api/v1", chatRoute);
 // app.use("/api/v1", postRoute);
 // app.use("/api/v1", commentRoute);
 
